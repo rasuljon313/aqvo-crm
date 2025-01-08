@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 
+
 const Products = () => {
     const navigate = useNavigate();
     useEffect(() => {
