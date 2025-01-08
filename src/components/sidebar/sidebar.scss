@@ -1,34 +1,77 @@
-.sidebar{
-    width: 300px;
-    position: relative;
-    background: #1c1c1c;
-    &_box{
-z-index: 999;
-position: fixed;
-    }
-    &_item{
-        padding: 10px;
-        color: #fff;
-        font-size: 26px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin: 15px 0 0 20px;
-        transition: 0.4s;
-        &.active{
-            transition: 0.4s;
-            background-color: #252525;  
-    color: white; 
-    border-radius: 10px 0 0 10px ;
-    a{
-        color: #f7c8cc;
-    }
-        }
-a{
-    font-family: Arial;
-    color: #fff;
-    font-size: 22px;
-}
-    }
-}
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.collapsed {
+    width: 80px; /* Adjust width when collapsed */
+  }
+  
+  .sidebar-toggle-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar_list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar_item {
+    margin: 10px 0;
+  }
+  
+  .menu-item-header {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .menu-text {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+  }
+  
+  .sub-menu {
+    margin-left: 20px;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sub-menu li {
+    margin: 5px 0;
+  }
+  
+  .sub-menu li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sub-menu li a:hover {
+    text-decoration: underline;
+  }
+  
+  .sidebar_item.active a {
+    font-weight: bold;
+  }
+  
+  .collapsed .menu-text {
+    opacity: 0; /* Hide text when collapsed */
+  }
+  
+  .collapsed .menu-icon {
+    margin-right: 0; /* Adjust icon margin when collapsed */
+  }
   

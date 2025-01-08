@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import useStore from "../../zustand";
 import Sidebar from "../sidebar/SideBar";
 import { useNavigate } from "react-router-dom";
-// import Nav from "../nav/Nav";
+import Nav from "../nav/Nav";
+
 
 const Header = () => {
   const [data, setData] = useState(null);
@@ -11,20 +11,19 @@ const Header = () => {
   const [names, setNames] = useState([]);
   const { token, refreshToken } = useStore();
   const navigate = useNavigate();
-  const [type, setType] = useState(null); // type state
+  const [type, setType] = useState(null); 
   useEffect(() => {
     if (token) {
       const intervalId = setInterval(() => {
-        refreshToken(navigate);  // Refresh token
-        navigate("/");  // Redirect to home page after token refresh
-      }, 60000); // Refresh token every 1 minute (60000 milliseconds)
+        refreshToken(navigate);  
+        navigate("/");  
+      }, 60000);
 
-      return () => clearInterval(intervalId); // Clean up the interval when component is unmounted
+      return () => clearInterval(intervalId); 
     }
   }, [token, navigate, refreshToken]);
 useEffect(() => {
     if (!token) {
-      // If no token, try to refresh it
       refreshToken(navigate);
     } else {
       fetch("https://aqvo.limsa.uz/api/analytics", {
@@ -61,25 +60,24 @@ useEffect(() => {
     const selectedValue = event.target.value;
     const selectedOption = dataConserve.find((option) => option.conserveType === selectedValue);
     if (selectedOption && selectedOption.productConsumptions) {
-      const selectedId = selectedOption.id; // id ni olish
+      const selectedId = selectedOption.id; 
       console.log("Selected ID: ", selectedId);
       
-    //   selectedId ni type sifatida saqlaymiz
-      setType(selectedId); // type ni saqlash
+      setType(selectedId); 
 
-      // Product names ni olish
       const newNames = selectedOption.productConsumptions.map((item) => item.product.productName);
       setNames(newNames);
+      
     }
   };
 
   useEffect(() => {
     if (type) { 
-      fetch(`https://aqvo.limsa.uz/api/analytics?type=${type}`, {
+      fetch(`https://aqvo.limsa.uz/api/analytics/type?typeId=${type}`, {
         method: "GET",
       })
         .then((response) => response.json())
-        .then((data) => setData(data))
+        .then((data) => console.log(data))
         .catch((error) => {
           console.error("Error fetching analytics data:", error);
         });
@@ -92,7 +90,7 @@ useEffect(() => {
         <div className="header_header">
           <Sidebar />
           <div className="header_box">
-            {/* <Nav /> */}
+<Nav/>
             <div className="header_card">
               <h1>Analitika bolimi</h1>
               <div className="header_card_child">

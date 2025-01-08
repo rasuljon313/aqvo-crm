@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 
 
+
+
+
 const Products = () => {
     const navigate = useNavigate();
     useEffect(() => {
@@ -15,7 +18,7 @@ const Products = () => {
       }, [navigate]);
   return (
     <>
-    <Sidebar/>
+<Sidebar/>
     Products
     </>
   )
