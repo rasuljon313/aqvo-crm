@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-const Sidebar = () => {
+const Bar = () => {
   const location = useLocation();
   const [expanded, setExpanded] = useState(null); // To manage which menu item is expanded
   const [collapsed, setCollapsed] = useState(false); // To manage the sidebar collapse/expand state
@@ -61,4 +61,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Bar;

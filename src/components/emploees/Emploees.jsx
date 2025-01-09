@@ -165,8 +165,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaEdit } from "react-icons/fa";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import Modal from "./Modal";
-import Sidebar from "../sidebar/Sidebar";
+
 import axios from "axios";
+import Bar from "../sidebar/Sidebar";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
@@ -257,7 +258,7 @@ const Employees = () => {
       <ToastContainer />
       <div className="grid">
 
-          <Sidebar />
+<Bar/>
         
         <div className="main-content">
           <h1>Hodimlar</h1>
