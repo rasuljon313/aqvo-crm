@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Bar from "../sidebar/Sidebar";
+import Bar from "../sidebar/Sidebar/Bar";
 
 
 const Market = () => {
