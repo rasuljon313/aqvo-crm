@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../sidebar/Sidebar";
-
-
-
-
+// import Sidebar from "../sidebar/Sidebar";
 
 const Products = () => {
     const navigate = useNavigate();
@@ -18,7 +14,7 @@ const Products = () => {
       }, [navigate]);
   return (
     <>
-<Sidebar/>
+{/* <Sidebar/> */}
     Products
     </>
   )
