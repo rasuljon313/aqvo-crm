@@ -256,9 +256,9 @@ const Employees = () => {
     <div className="crm-panel">
       <ToastContainer />
       <div className="grid">
-        <div className="sidebar">
+
           <Sidebar />
-        </div>
+        
         <div className="main-content">
           <h1>Hodimlar</h1>
           <div className="modal_flex">

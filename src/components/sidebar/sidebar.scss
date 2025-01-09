@@ -1,13 +1,15 @@
 .sidebar {
     width: 250px;
-    background-color: #333;
+    height: 100vh;
+    background-color:gray;
     color: white;
     padding: 10px;
     transition: width 0.3s ease;
   }
   
   .sidebar.collapsed {
-    width: 80px; /* Adjust width when collapsed */
+    max-width: 80px; /* Adjust width when collapsed */
+    
   }
   
   .sidebar-toggle-btn {
@@ -17,6 +19,9 @@
     font-size: 20px;
     cursor: pointer;
     margin-bottom: 10px;
+    width: unset !important;
+    margin: 0 !important;
+    padding: 15px;
   }
   
   .sidebar_list {
@@ -36,12 +41,14 @@
   
   .menu-icon {
     font-size: 20px;
-    margin-right: 10px;
+padding: 15px;
   }
   
   .menu-text {
     display: inline-block;
     transition: opacity 0.3s ease;
+    color: #fff;
+    font-family: Arial;
   }
   
   .sub-menu {
@@ -65,6 +72,7 @@
   
   .sidebar_item.active a {
     font-weight: bold;
+    font-size: 18px;
   }
   
   .collapsed .menu-text {
