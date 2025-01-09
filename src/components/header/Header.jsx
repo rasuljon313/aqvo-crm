@@ -3,7 +3,7 @@ import useStore from "../../zustand";
 
 import { useNavigate } from "react-router-dom";
 import Nav from "../nav/Nav";
-import Bar from "../sidebar/Sidebar";
+import Side_bar from "../bar/Side_bar";
 
 
 const Header = () => {
@@ -89,7 +89,7 @@ useEffect(() => {
     <>
       <header>
         <div className="header_header">
-          <Bar />
+<Side_bar/>
           <div className="header_box">
 <Nav/>
             <div className="header_card">

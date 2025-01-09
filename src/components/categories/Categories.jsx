@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Bar from "../sidebar/Sidebar";
+import Side_bar from "../bar/Side_bar";
+
 
 const Categories = () => {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Categories = () => {
       }, [navigate]);
   return (
    <>
-<Bar/>
+<Side_bar/>
 
     <div>omborho</div>
    </>

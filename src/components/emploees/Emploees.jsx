@@ -167,7 +167,8 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import Modal from "./Modal";
 
 import axios from "axios";
-import Bar from "../sidebar/Sidebar";
+import Side_bar from "../bar/Side_bar";
+// import Bar from "../sidebar/Sidebar";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
@@ -258,7 +259,7 @@ const Employees = () => {
       <ToastContainer />
       <div className="grid">
 
-<Bar/>
+<Side_bar/>
         
         <div className="main-content">
           <h1>Hodimlar</h1>
