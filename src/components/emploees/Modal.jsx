@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./Modal.scss";
+
 import { toast } from "react-toastify";
 
 const Modal = ({ fetchEmployees, editingEmployee, setEditingEmployee }) => {
