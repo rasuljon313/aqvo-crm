@@ -17,7 +17,7 @@
 // }
 
 .main-content {
-color: white;
+color: rgb(0, 0, 0);
 }
 table{
 border:solid 1px rgb(41, 41, 41);
@@ -59,6 +59,7 @@ width: 90%;
         svg{
          cursor: pointer;
          font-size: 16px;
+         color: rgb(56, 56, 56);
         }
     }
     .edit:hover{

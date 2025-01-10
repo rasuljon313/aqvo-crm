@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import { toast } from "react-toastify";
 
 const Modal = ({ fetchEmployees, editingEmployee, setEditingEmployee }) => {
@@ -23,9 +21,9 @@ const Modal = ({ fetchEmployees, editingEmployee, setEditingEmployee }) => {
         position: editingEmployee.position || "",
         salary: editingEmployee.salary || "",
       });
-      setIsOpen(true); 
+      setIsOpen(true);
     } else {
-      setEmployeeData({ 
+      setEmployeeData({
         firstName: "",
         lastName: "",
         phoneNumber: "",
@@ -38,60 +36,81 @@ const Modal = ({ fetchEmployees, editingEmployee, setEditingEmployee }) => {
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
-    setEditingEmployee(null);  
+    setEmployeeData({
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      position: "",
+      salary: "",
+    });
+    setEditingEmployee(null);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    // Faqat harflar va bo'sh joylarga ruxsat berish
+    if (["firstName", "lastName", "position"].includes(name)) {
+      const regex = /^[A-Za-z\s]*$/;
+      if (!regex.test(value)) return;
+    }
+
     setEmployeeData({ ...employeeData, [name]: value });
   };
 
   const handleEmployee = async (e, method) => {
     e.preventDefault();
+
     const token = localStorage.getItem("token");
-    
-  
-    const formattedPhoneNumber = employeeData.phoneNumber.length > 15 
-      ? employeeData.phoneNumber.slice(0, 15) 
-      : employeeData.phoneNumber;
-  
+    if (!token) {
+      toast.error("Foydalanuvchi tokeni topilmadi!");
+      return;
+    }
+
+    const formattedPhoneNumber = employeeData.phoneNumber.slice(0, 15);
     const employeePayload = {
       firstName: employeeData.firstName,
       lastName: employeeData.lastName,
-      phoneNumber: formattedPhoneNumber,  
+      phoneNumber: formattedPhoneNumber,
       position: employeeData.position,
       salary: parseInt(employeeData.salary) || 0,
       startedWorkingAt: employeeData.startedWorkingAt || "2024-11-25",
     };
-  
+
     try {
       if (method === "add") {
-        // const response = await axios.post(
-        //   "https://aqvo.limsa.uz/api/auth/employee/sign-up", 
-        //   employeePayload,
-        //   { headers: { Authorization: `Bearer ${token}` } }
-        // );
+        await axios.post(
+          "https://aqvo.limsa.uz/api/auth/employee/sign-up",
+          employeePayload,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         toast.success("Yangi hodim muvaffaqiyatli qo'shildi!");
-      } else if (method === "update" && editingEmployee) {
+      } else if (method === "update" && editingEmployee?.id) {
         await axios.put(
-          `https://aqvo.limsa.uz/api/users/${editingEmployee.id}`, 
+          `https://aqvo.limsa.uz/api/users/${editingEmployee.id}`,
           employeePayload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         toast.success("Hodim muvaffaqiyatli yangilandi!");
+      } else {
+        toast.error("Hodim ID topilmadi!");
       }
       fetchEmployees();
       setIsOpen(false);
       setEditingEmployee(null);
     } catch (error) {
       console.error("Error response:", error.response);
-      toast.error("Xatolik yuz berdi!");
+      const status = error.response?.status;
+
+      if (status === 401) {
+        toast.error("Token eskirgan yoki noto‘g‘ri!");
+      } else if (status === 400) {
+        toast.error("Yuborilgan ma'lumotlarda xato bor!");
+      } else {
+        toast.error("Xatolik yuz berdi!");
+      }
     }
   };
-  
-  
-  
-
 
   return (
     <div className="Modal">
@@ -134,6 +153,7 @@ const Modal = ({ fetchEmployees, editingEmployee, setEditingEmployee }) => {
                 placeholder="Lavozimi"
                 value={employeeData.position}
                 onChange={handleInputChange}
+                required
               />
               <input
                 type="number"
@@ -143,7 +163,9 @@ const Modal = ({ fetchEmployees, editingEmployee, setEditingEmployee }) => {
                 onChange={handleInputChange}
               />
               <div className="modal-buttons">
-                <button type="submit">{editingEmployee ? "Yangilash" : "Qo'shish"}</button>
+                <button type="submit">
+                  {editingEmployee ? "Yangilash" : "Qo'shish"}
+                </button>
                 <button type="button" onClick={toggleModal}>
                   Bekor qilish
                 </button>
